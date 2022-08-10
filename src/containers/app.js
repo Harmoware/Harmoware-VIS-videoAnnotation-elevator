@@ -94,7 +94,7 @@ class App extends Container {
       const dataLength = doordataArray.length
       context.beginPath()
       for(let i=0; i<dataLength; i=i+1){
-        const value = (doordataArray[i]*graphheight)-graphheight
+        const value = (doordataArray[i]*(graphheight-6))-(graphheight-6)-3
         if(i===0){
           context.moveTo(start_x+(i*framePerPx),clientHeight-value)
         }else{
