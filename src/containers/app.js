@@ -77,12 +77,18 @@ class App extends Container {
       for(let j=0; j<elevatorDoorData.length; j=j+100){
         context.moveTo(start_x+(j*framePerPx),clientHeight-15)
         context.lineTo(start_x+(j*framePerPx),clientHeight)
-        context.font = '12px sans-serif'
         context.fillText(`${elevatorDoorData[j].elapsedtime}`,start_x+(j*framePerPx)+2,clientHeight-15)
-        context.moveTo(start_x+(j*framePerPx),clientHeight+graphheight)
-        context.lineTo(start_x+(j*framePerPx),clientHeight+graphheight+15)
-        context.font = '10px sans-serif'
-        context.fillText(`${elevatorDoorData[j].datestring.split(' ')[1]}`,start_x+(j*framePerPx)+2,clientHeight+graphheight+2)
+      }
+      context.font = '10px sans-serif'
+      for(let j=0; j<elevatorDoorData.length; j=j+1){
+        const date = new Date(elevatorDoorData[j].realtime * 1000)
+        const minutes = date.getMinutes()
+        const seconds = date.getSeconds()
+        if(seconds === 0 && (minutes % 5) === 0){
+          context.moveTo(start_x+(j*framePerPx),clientHeight+graphheight)
+          context.lineTo(start_x+(j*framePerPx),clientHeight+graphheight+15)
+          context.fillText(`${elevatorDoorData[j].datestring.split(' ')[1]}`,start_x+(j*framePerPx)+2,clientHeight+graphheight+2)
+        }
       }
       context.stroke()
       context.font = '12px sans-serif'
