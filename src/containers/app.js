@@ -42,7 +42,7 @@ class App extends Container {
   }
 
   componentDidUpdate(){
-    if(Math.abs(this.currentTime - this.videoRef.current.player.currentTime) >= (1/60)){
+    if(Math.abs(this.currentTime - this.videoRef.current.player.currentTime) >= (1/120)){
       this.currentTime = this.videoRef.current.player.currentTime
       this.props.actions.setTime(this.currentTime)
     }
@@ -85,9 +85,10 @@ class App extends Container {
         const minutes = date.getMinutes()
         const seconds = date.getSeconds()
         if(seconds === 0 && (minutes % 5) === 0){
+          const timestr = elevatorDoorData[j].datestring.substring(8,16)
           context.moveTo(start_x+(j*framePerPx),clientHeight+graphheight)
           context.lineTo(start_x+(j*framePerPx),clientHeight+graphheight+15)
-          context.fillText(`${elevatorDoorData[j].datestring.split(' ')[1]}`,start_x+(j*framePerPx)+2,clientHeight+graphheight+2)
+          context.fillText(`${timestr}`,start_x+(j*framePerPx)+2,clientHeight+graphheight+4)
         }
       }
       context.stroke()
