@@ -114,10 +114,11 @@ class App extends Container {
       const operation = elevatorDoorData.map((data,idx)=>{
         const wk_x = start_x+(idx*framePerPx)
         const condition = data.doordata===1 ? 'open' : 'close'
+        const condiShift = data.doordata===1 ? -20 : 20
         return {...data,
           path:{coordinate:[[wk_x,clientHeight-20],[wk_x,clientHeight+graphheight]],strokeStyle:"lime"},
           text:[{fillText:{text:`${data.elapsedtime}`,x:wk_x+2,y:clientHeight-20},fillStyle:"lime"},
-                {fillText:{text:`${condition}`,x:wk_x+2,y:clientHeight+(graphheight/2)},fillStyle:"lime"}]
+                {fillText:{text:`${condition}`,x:wk_x+2,y:clientHeight+(graphheight/2)+condiShift},fillStyle:"lime"}]
         }
       })
       const movesbase = [{operation}]
