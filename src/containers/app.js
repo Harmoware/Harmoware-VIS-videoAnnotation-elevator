@@ -207,9 +207,11 @@ const CanvasComponent = (props)=>{
     }
   },[canvasRef,props.videoUrl,props.width,props.height,props.elevatorDoorData])
 
-  const Result = React.useMemo(()=>
-    <canvas ref={canvasRef} width={props.width} height={props.height} className={props.className}/>
-  ,[props])
+  const Result = React.useMemo(()=>{
+    console.log('CanvasComponent')
+    return(<canvas ref={canvasRef} width={props.width} height={props.height} className={props.className}/>)
+  }
+  ,[props.width,props.height,props.className])
 
   return Result
 }
@@ -243,9 +245,11 @@ const MouseCaptureCanvas = (props)=>{
     }
   },[canvasRef])
 
-  const Result = React.useMemo(()=>
-    <canvas ref={canvasRef} width={props.width} height={props.height} className={props.className}/>
-  ,[props])
+  const Result = React.useMemo(()=>{
+    console.log('MouseCaptureCanvas')
+    return(<canvas ref={canvasRef} width={props.width} height={props.height} className={props.className}/>)
+  }
+  ,[props.width,props.height,props.className])
 
   return Result
 }
