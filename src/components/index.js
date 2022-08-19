@@ -69,9 +69,9 @@ const Controller = (props)=>{
           </>,[paused])}
         </li>
         <li className="flex_column">
-          {React.useMemo(()=><><span>speed&nbsp;</span>
+          <span>speed&nbsp;</span>
             <input type="range" value={state.speed} min={1} max={10} step={1} style={{'width':'100%'}}
-              onChange={setSpeed} className='harmovis_input_range' /></>,[state.speed])}
+              onChange={setSpeed} className='harmovis_input_range' />
         </li>
         </ul>
     </div>
