@@ -84,9 +84,9 @@ const AnnotationLayer = (props)=>{
         }
     },[context,props.data,props.width,props.height])
 
-    return (
-        <canvas className={props.className}
-            ref={canvasRef} width={props.width} height={props.height} />
+    return (<>{React.useMemo(()=><>
+            <canvas className={props.className}
+            ref={canvasRef} width={props.width} height={props.height} /></>,[props])}</>
     )
 }
 AnnotationLayer.defaultProps = {
