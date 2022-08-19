@@ -64,11 +64,7 @@ export const ElevatorDoorInput = (props)=>{
         e.target.value = '';
     };
 
-    return (
+    return (<>{React.useMemo(()=>
         <input type="file" accept=".csv"
-        id={id}
-        onChange={onSelect}
-        onClick={onClick}
-        />
-    );
+        id={id} onChange={onSelect} onClick={onClick} />,[])}</>)
 }

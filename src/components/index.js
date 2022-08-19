@@ -25,53 +25,53 @@ const Controller = (props)=>{
     }
   }
 
-  const ControlButton = React.useMemo(()=>
-    <>{paused ?
-        <button onClick={videoplay} className="harmovis_button">play</button>:
-        <button onClick={videopause} className="harmovis_button">pause</button>}
-      <button onClick={videorestart} className="harmovis_button">restart</button>
-    </>
-  ,[paused])
-
   return (
     <div className="harmovis_controller">
         <ul className="flex_list">
         <li className="flex_column">
-          <VideoInput updateState={updateState}/>
+          {React.useMemo(()=><VideoInput updateState={updateState}/>,[])}
         </li>
         <li className="flex_row">
+          {React.useMemo(()=><>
             <div className="harmovis_input_button_column" title='3D object data selection'>
             <label htmlFor="ElevatorDoorInput">
             ElevatorDoor Data Selection
             <ElevatorDoorInput actions={actions} id="ElevatorDoorInput" updateState={updateState}/>
             </label>
             <div>{elevatorDoorFileName}</div>
-            </div>
+            </div></>,[actions, elevatorDoorFileName])}
         </li>
         <li className="flex_column">
-          <label htmlFor="realtime">realtime (sec)</label>
-            <input type="number" value={realtime|0} className='harmovis_input_number' disabled id="realtime"/>
+          {React.useMemo(()=><><label htmlFor="realtime">realtime (sec)</label>
+            <input type="number" value={realtime|0} className='harmovis_input_number' disabled id="realtime"/></>,
+            [(realtime|0)])}
         </li>
         <li className="flex_column">
           realtime&nbsp;:&nbsp;<SimulationDateTime realtime={realtime|0}/>
         </li>
         <li className="flex_column">
-          <label htmlFor="ElapsedTimeRange">videoTime (sec)</label>
+          {React.useMemo(()=><><label htmlFor="ElapsedTimeRange">videoTime (sec)</label>
             <input type="number" value={currentTime|0} className='harmovis_input_number'
-              min={0} max={duration} onChange={setTime} />
+              min={0} max={duration} onChange={setTime} /></>,[(currentTime|0),duration])}
         </li>
         <li className="flex_column">
-          <input type="range" value={currentTime} min={0} max={duration} step={(duration/framecount)} style={{'width':'100%'}}
+          {React.useMemo(()=><>{
+            <input type="range" value={currentTime} min={0} max={duration} step={(duration/framecount)} style={{'width':'100%'}}
             onChange={setTime} className='harmovis_input_range' />
+          }</>,[currentTime,duration,framecount])}
         </li>
 
         <li className="flex_row">
-          {ControlButton}
+          {React.useMemo(()=><>{paused ?
+              <button onClick={videoplay} className="harmovis_button">play</button>:
+              <button onClick={videopause} className="harmovis_button">pause</button>}
+            <button onClick={videorestart} className="harmovis_button">restart</button>
+          </>,[paused])}
         </li>
         <li className="flex_column">
-          <span>speed&nbsp;</span>
-          <input type="range" value={state.speed} min={1} max={10} step={1} style={{'width':'100%'}}
-            onChange={setSpeed} className='harmovis_input_range' />
+          {React.useMemo(()=><><span>speed&nbsp;</span>
+            <input type="range" value={state.speed} min={1} max={10} step={1} style={{'width':'100%'}}
+              onChange={setSpeed} className='harmovis_input_range' /></>,[state.speed])}
         </li>
         </ul>
     </div>
