@@ -56,7 +56,7 @@ const Controller = (props)=>{
         </li>
         <li className="flex_column">
           {React.useMemo(()=><>{
-            <input type="range" value={currentTime} min={0} max={duration} step={(duration/framecount)} style={{'width':'100%'}}
+            <input type="range" value={currentTime} min={0} max={duration} step={Math.floor((duration/framecount)*100)/100} style={{'width':'100%'}}
             onChange={setTime} className='harmovis_input_range' />
           }</>,[currentTime,duration,framecount])}
         </li>
