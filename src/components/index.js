@@ -9,7 +9,8 @@ const Controller = (props)=>{
     updateState, videoControl, realtime } = props;
   const { elevatorDoorFileName } = inputFileName;
   const {currentTime=0,duration=0} = videoControl ? videoControl :{}
-  const framecount = elevatorDoorData!==null ? elevatorDoorData.length-1 : 1
+  const framecount = elevatorDoorData!==null ? elevatorDoorData.length-1 : duration!==0 ? duration : 1
+  const step = Math.floor((duration/framecount)*100)/100
 
   const setTime = (e)=>{
     if(videoControl){
@@ -56,7 +57,7 @@ const Controller = (props)=>{
         </li>
         <li className="flex_column">
           {React.useMemo(()=><>{
-            <input type="range" value={currentTime} min={0} max={duration} step={Math.floor((duration/framecount)*100)/100} style={{'width':'100%'}}
+            <input type="range" value={currentTime} min={0} max={duration} step={step} style={{'width':'100%'}}
             onChange={setTime} className='harmovis_input_range' />
           }</>,[currentTime,duration,framecount])}
         </li>
