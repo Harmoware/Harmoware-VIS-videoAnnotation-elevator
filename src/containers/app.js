@@ -53,6 +53,7 @@ class App extends Container {
   }
 
   updateCanvas(context,width,height,elevatorDoorData){
+    console.log('updateCanvas')
     const clientHeight = 770
     const start_x = 100
     const graphwidth = width-start_x-50
@@ -157,9 +158,9 @@ class App extends Container {
   }
 
   render() {
-    const { movedData } = this.props;
+    const { movedData, timeLength } = this.props;
     const PathData = movedData
-    const {elevatorUseRete,realtime,frame} = movedData.length>0 ? movedData[0] : {elevatorUseRete:0,realtime:0,frame:0}
+    const {realtime} = movedData.length>0 ? movedData[0] : {realtime:0}
     const {paused=false,currentTime=0,duration=0} = this.videoRef.current ? this.videoRef.current.player :{}
     const {clientWidth=0,clientHeight=0} = this.videoRef.current ? this.videoRef.current.videoRef.current :{}
 
@@ -182,9 +183,8 @@ class App extends Container {
         <div className="harmovis_footer">
           videoWidth:{clientWidth}&nbsp;
           videoHeight:{clientHeight}&nbsp;
-          elevatorUseRete:{(elevatorUseRete*100)|0}%&nbsp;
+          timeLength:{timeLength}&nbsp;
           realtime:{realtime|0}&nbsp;
-          frame:{frame}&nbsp;
           videoDuration:{duration ? duration : 0}&nbsp;
           videoTime:{currentTime ? currentTime : 0}&nbsp;
         </div>
