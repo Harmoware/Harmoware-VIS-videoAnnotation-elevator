@@ -10,7 +10,7 @@ const Controller = (props)=>{
   const { elevatorDoorFileName } = inputFileName;
   const {currentTime=0,duration=0} = videoControl ? videoControl :{}
   const framecount = elevatorDoorData!==null ? elevatorDoorData.length-1 : duration!==0 ? duration : 1
-  const step = Math.floor((duration/framecount)*100)/100
+  const step = 1 //Math.floor((duration/framecount)*100)/100
 
   const setTime = (e)=>{
     if(videoControl){
