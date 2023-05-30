@@ -7,6 +7,11 @@ export const VideoInput = (props)=>{
     const [value,setValue] = React.useState("data/A7_video_07-00-05_03.mp4")
     const { updateState } = props;
 
+    React.useEffect(()=>{
+        setUrlCheck(true)
+        updateState({ videoUrl:value });
+    },[])
+
     const onClick = ()=>{
         const videoUrl = inputRef.current.value
         const result = true ///^https?:\/\/[\w!?/+\-_~;.,*&@#$%()'[\]]+/.test(videoUrl)
